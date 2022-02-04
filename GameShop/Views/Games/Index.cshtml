@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Game>
+
+@{
+    ViewData["Title"] = "Games";
+}
+
+<div class="row" )>
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-12 border-primary mb-2">
+            <div class="card " style="max-width: 550px;  flex: 1">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-secondary">
+                            <p class="card-text">
+                                <h5 class="card-title text-center">
+                                    @item.Title
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <a class="text-white float-right" asp-action="Update" asp-route-id="@item.Id">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                        <a class="text-white float-right" asp-action="Delete" asp-route-id="@item.Id">
+                                            <i class="bi bi-x-circle-fill"></i>
+                                        </a>
+                                    }
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                    <a style="width: 100%"  asp-action="Details" asp-route-id="@item.Id"><img src="@item.Image" width="100%" height="400px"  alt="@item.Title"></a>
+                    
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer ">
+                            <p class="card-text">
+                                <a  style="width: 100%"class="btn btn-danger text-white" asp-controller="Orders"asp-action="AddToCart" asp-route-id="@item.Id"> Buy  @item.Price.ToString("c")</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

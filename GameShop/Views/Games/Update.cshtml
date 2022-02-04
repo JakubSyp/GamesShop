@@ -1,0 +1,98 @@
+﻿@using GameShop.Enums
+@model NewGame
+
+@{
+    ViewData["Title"] = "Edit game";
+}
+<div class="row" style="display:flex">
+    <div class="col-md-12"  >
+        <p>
+            <h4>Update game</h4>
+        </p>
+
+        <div class="row" style="display: flex">
+            <div class="col-md-6  ">
+                <form asp-action="Update">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Title" class="control-label"></label>
+                                <input asp-for="Title" class="form-control"/>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="GameType" class="control-label"></label>
+                                <select asp-for="GameType" asp-items="Html.GetEnumSelectList<GameType>()" class="form-control"></select>
+                                <span asp-validation-for="GameType" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Platform" class="control-label"></label>
+                                <select asp-for="Platform" asp-items="Html.GetEnumSelectList<Platform>()" class="form-control"></select>
+                                <span asp-validation-for="Platform" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price" class="control-label"></label>
+                                <input asp-for="Price" type="number" class="form-control"/>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Image" class="control-label"></label>
+                                <input asp-for="Image" class="form-control"/>
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ReleaseDate" class="control-label"></label>
+                                <input asp-for="ReleaseDate" type="date"  class="form-control"/>
+                                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Language" class="control-label"></label>
+                                <input asp-for="Language" class="form-control"/>
+                                <span asp-validation-for="Language" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description"  class="form-control" ></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right"/>
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col-md-6 text-center">
+                <img  style="width: 400px; height: 500px" id="ImagePreview" />
+            </div>
+            
+        </div>
+         
+        
+    </div>
+    
+    
+</div>
+
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ImagePreview');
+            output.src = $("#Image").val();
+        })
+        $("#Image").on("change", function () {
+            var output = document.getElementById('ImagePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
